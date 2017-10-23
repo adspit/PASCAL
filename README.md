@@ -5,4 +5,4 @@ Author: Adriana Pitea
 Maintainer: Adriana Pitea <adriana.pitea@helmholtz-muenchen.de>
 
 
-Description: This pipeline enables the assess the accuracy of commonly used copy number alteration (CNA) calling algorithms from Affymetrix SNP 6.0 array data in the presence of confounding variables such as normal DNA contamination and CNA region length.
+Description: This pipeline was built to assess the accuracy of commonly used copy number alteration (CNA) calling algorithms from Affymetrix SNP 6.0 array data in the presence of confounding variables such as normal DNA contamination and CNA region length.
