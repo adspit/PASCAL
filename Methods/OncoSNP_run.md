@@ -7,4 +7,4 @@ We generated 80 batch files - each consisting of two columns:
   --gcdir b37 --hgtables configuration/hgTables_b37.txt --paramsfile configuration/hyperparameters-affy.dat \
   --levelsfile configuration/levels-affy.dat --trainingstatesfile configuration/trainingStates.dat \
   --tumourstatesfile configuration/tumourStates.dat --isdiploid --chr 1 --fulloutput --allprobes
-´´´
+
