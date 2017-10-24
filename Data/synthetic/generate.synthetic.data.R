@@ -152,10 +152,10 @@ return(var.sim$profile)}))
  baf_signals = cbind(a1_baf_signals, a7_baf_signals,a5_baf_signals,a3_baf_signals)
  colnames(baf_signals) = colnames(lrr_signals)
  # save BAF matrix for set 10000
- save(lrr_signals, file = "baf_signals_10000_probes.Rdata")
+ save(baf_signals, file = "baf_signals_10000_probes.Rdata")
 
 
-
+# same for n=100000 and n=1000000, where n represents the number of probes
 
 
 
