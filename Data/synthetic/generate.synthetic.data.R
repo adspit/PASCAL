@@ -80,7 +80,7 @@ region_lengths[,1:5]
 # [2,]       1198692        313649         99710        660118             0
 # [3,]             0       1070906        729912             0       1485831
 rownames(region_lengths) = as.data.frame(table(initial.regions[,3]))$Var1
-save(initial.regions, file ="../initial.regions.Rdata")
+save(initial.regions, file ="initial.regions.Rdata")
 
 
 # simulate samples with 100000 probes
