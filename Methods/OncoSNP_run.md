@@ -6,5 +6,5 @@ We generated 80 batch files - each consisting of two columns:
 ./run_oncosnp.sh  --batch-file batch_file.txt --output-dir output_oncosnp \
   --gcdir b37 --hgtables configuration/hgTables_b37.txt --paramsfile configuration/hyperparameters-affy.dat \
   --levelsfile configuration/levels-affy.dat --trainingstatesfile configuration/trainingStates.dat \
-  --tumourstatesfile configuration/tumourStates.dat --isdiploid --chr 1 --fulloutput --allprobes
+  --tumourstatesfile configuration/tumourStates.dat --isdiploid --chr 1 --normalcontentlevels 0:1:0 --allprobes --fulloutput
 
