@@ -16,9 +16,22 @@ colnames(F.score)[3:4] =c("Class","Value")
 
 F.score$Class = factor(F.score$Class, levels = c("loss","normal","gain"))
 
-# plot F1 scores 
-pdf("f.scores.n10_6.pdf", width = 40)
-ggplot(data = F.score, aes(x = Class , y = Value, fill=Method)) + geom_boxplot(aes(Class, colour = Method),alpha=0.3) + geom_point(position=position_jitterdodge(jitter.width = 0.1, jitter.heigh=0), aes(colour=Method)) + theme_bw()+scale_color_manual(values= c("mediumslateblue","yellow2", "darkturquoise","hotpink"))+theme(panel.grid.major = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), text = element_text(size=27), legend.position = "bottom")+scale_fill_manual(values= c("mediumslateblue","yellow2", "darkturquoise", "hotpink"), guide=F)+scale_y_continuous(limits = c(0, 1))+ylab("F-score")+xlab(NULL)+facet_wrap(~tumour.purity, ncol = 4)
+F.score$tumour.purity = factor(F.score$tumour.purity, levels = c("0.3","0.5","0.7","1"))
+
+# plot F1 scores
+
+pdf("final.f.scores.class.facewrap.n10_6_new.pdf", width = 20, height = 8, useDingbats = FALSE)
+ggplot(data = F.score, aes(x = tumour.purity , y = Value, fill=Method)) 
++ geom_boxplot(aes(tumour.purity, colour = Method),alpha=0.7) 
++ geom_point(position=position_jitterdodge(jitter.width = 0.1, jitter.heigh=0), aes(colour=Method)) 
++ theme_bw()
++scale_color_manual(values= c('#dc828a', "#cddc82", "#9182dc", '#82cddc'),  labels = c('OncoSNP', 'ASCAT', 'CGHcall', 'CGHcall*'))
++theme(panel.grid.major = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), text = element_text(size=16),plot.title=element_text(size=16), legend.position = "bottom", strip.text = element_text(size=16), axis.text.y=element_text(size=16), axis.text.x=element_text(size=16), legend.title=element_text(size=16), legend.text=element_text(size=16))
++scale_fill_manual(values= c('#dc828a', "#cddc82", "#9182dc", '#82cddc'), guide=F)
++scale_y_continuous(limits = c(0, 1))
++ylab("F-score")+xlab(NULL)
++facet_wrap(~Class, ncol = 4)
++ggtitle(expression(paste("Signal length = ",10^{6},"bp")))
 dev.off()
 
 
