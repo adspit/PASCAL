@@ -73,6 +73,6 @@ F.score.cghcall.n.10_6$loss[is.nan(F.score.cghcall.n.10_6$loss)] = 0
 F.score.cghcall.n.10_6$normal[is.nan(F.score.cghcall.n.10_6$normal)] = 0
 F.score.cghcall.n.10_6$gain[is.nan(F.score.cghcall.n.10_6$gain)] = 0
 
-save(F.score.cghcall.n.10_6, file = 'F.score.cghcall.n.10_6.Rdata')
+save(F.score.cghcall.n.10_6, file = 'F.score.cghcall.n10_6.Rdata')
 
 
