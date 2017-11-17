@@ -74,7 +74,7 @@ recall.oncoSNP.loss <- confusion.matrix.oncosnp[1,-c(1,2)] / apply(confusion.mat
 
 recall.oncoSNP.normal <- confusion.matrix.oncosnp[5,-c(1,2)] / apply(confusion.matrix.oncosnp[,-c(1,2)],2,function(x) sum(x[c(2,5,8)]))
 recall.oncoSNP.gain <- confusion.matrix.oncosnp[9,-c(1,2)] /apply(confusion.matrix.oncosnp[,-c(1,2)],2,function(x) sum(x[c(3,6,9)]))
-#????
+
 
 
 F.oncoSNP.gain <- as.numeric((2 * precision.oncoSNP.gain * recall.oncoSNP.gain) / (precision.oncoSNP.gain + recall.oncoSNP.gain))
