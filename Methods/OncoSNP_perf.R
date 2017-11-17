@@ -29,6 +29,9 @@ for(i in seq_along(OncoSNP.files))
 }
 
 
+# load Rdata object with initial states
+load('initial.regions.Rdata')
+
 #reorder initial regions so that the sample order matches the one from oncosnp
 
 initial.regions = cbind(initial.regions[,301:400], initial.regions[,201:300], initial.regions[,101:200], initial.regions[,1:100])
