@@ -91,4 +91,4 @@ F.score.oncosnp.n.10_6$loss[is.nan(F.score.oncosnp.n.10_6$loss)] = 0
 F.score.oncosnp.n.10_6$normal[is.nan(F.score.oncosnp.n.10_6$normal)] = 0
 F.score.oncosnp.n.10_6$gain[is.nan(F.score.oncosnp.n.10_6$gain)] = 0
 
-save(F.score.oncosnp.n.10_6, file="../F.score.oncosnp.n.10_6.Rdata")
+save(F.score.oncosnp.n.10_6, file="F.score.oncosnp.n.10_6.Rdata")
