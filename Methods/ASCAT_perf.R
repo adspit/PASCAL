@@ -5,7 +5,7 @@ library(reshape2)
 
   
 dim(initial.regions)
-# [1] 10000   400
+# [1] 1000000   400
 
 
 ascat.CN <- ascat.output$nA+ascat.output$nB
@@ -28,7 +28,6 @@ colnames(confusion.matrix.ascat) <- colnames(i.CN)
 # rows represent the initial data
 # cols represent the ascat calls 
 
-
 confusion.matrix.ascat <- cbind(as.data.frame(table(i.CN[,1],ascat.CN[,1]))[,1:2], confusion.matrix.ascat)
 
 colnames(confusion.matrix.ascat)[1:2] <- c("initial", "ASCAT")
@@ -41,14 +40,13 @@ true.i <- as.numeric(levels(confusion.matrix.ascat[,1]))[confusion.matrix.ascat[
 
 
 
-# accuracy method
+# accuracy
 accuracy.ascat<- apply(confusion.matrix.ascat[,-c(1,2)], 2, function(x)sum(x[true.i])/sum(x))
 
 
-
+# precision for each class
 precision.ascat.loss <- as.numeric(confusion.matrix.ascat[1,-c(1,2)] / apply(confusion.matrix.ascat[,-c(1,2)],2,function(x) sum(x[1:3])))
 #precision.ascat.loss[is.nan(precision.ascat.loss)] 
-
 
 precision.ascat.normal <- as.numeric(confusion.matrix.ascat[5,-c(1,2)] / apply(confusion.matrix.ascat[,-c(1,2)],2,function(x) sum(x[4:6])))
 
@@ -56,7 +54,7 @@ precision.ascat.gain <- as.numeric(confusion.matrix.ascat[9,-c(1,2)] / apply(con
 # precision.ascat.gain[is.nan(as.numeric(precision.ascat.gain))] <- 0
 
 
-#recall - specificity
+#recall - specificity for each class
 recall.ascat.loss <- as.numeric(confusion.matrix.ascat[1,-c(1,2)] / apply(confusion.matrix.ascat[,-c(1,2)],2,function(x) sum(x[c(1,4,7)])))
 # recall.ascat.loss[is.nan(as.numeric(recall.ascat.loss))] <- 0
 
