@@ -83,7 +83,7 @@ length(grep("t0.3", colnames(ascat.CN)))
 # complex
 F.score.ascat = data.frame(loss = F1.ascat.loss, normal = F1.ascat.normal, gain = F1.ascat.gain, Method = "ASCAT", tumour.purity = c(rep(1,98),rep(.7,99),rep(.5,100),rep(.3,100))) 
 
-save(F.score.ascat,file = "F.score.ascat.Rdata")
+save(F.score.ascat,file = "F.score.ascat.n10_6.Rdata")
 
 
 
