@@ -1,6 +1,6 @@
 For OncoSNP, we first downloaded and installed the algorithm by following the instructions given at: https://sites.google.com/site/oncosnp/.
 Once the installation was done, we ran OncoSNP on the grid to reduce the computational time. 
-We generated 80 batch files - each consisting of two columns: SampleID and TumourFile (lcoation of the tumour sample file)
+We generated 80 batch files - each consisting of two columns: SampleID and TumourFile (location of the tumour sample file)
 ```shell
 
 ./run_oncosnp.sh  --batch-file batch_file.txt --output-dir output_oncosnp \
