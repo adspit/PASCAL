@@ -1,4 +1,4 @@
-# CNAcomp
+# PASCAL
 Pipeline that aims to assess the accuracy of commonly used algorithms for calling copy number alterations from Affymetrix SNP 6.0 array data in the presence of confounding variables.
 
 Author: Adriana Pitea \
