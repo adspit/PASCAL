@@ -65,7 +65,7 @@ initial.regions = cbind(initial.regions,do.call(cbind, lapply(a_3, function(x) x
 colnames(initial.regions) = colnames(lrr_signals)
 
 # collapse states to loss, normal and gain
-initial.regions[initial.regions%in% "(1,1)" | initial] = 0
+initial.regions[initial.regions%in% "(1,1)" | initial.region%in%'(0,2)'] = 0
 initial.regions[initial.regions%in% "(0,1)" ] = -1
 initial.regions[initial.regions%in% "(1,2)" | initial.regions%in% "(0,3)" | initial.regions%in% "(1,3)" | initial.regions%in% "(2,3)" | initial.regions%in% "(2,2)" ] = 1
 initial.regions = as.data.frame(initial.regions)
