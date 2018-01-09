@@ -3,11 +3,10 @@
 # set your WD
 
 # load CGHcall results - the Rdata object obtained after running the expandCGHcall function
-load("~/Documents/SNP/JointSegSyntheticData/Callobj_profiles1to100.Rdata")
+load("initial.regions.Rdata")
 
-#dim(result0)
-# Features  Samples 
-# 1000000      400
+#dim(initial.regions)
+#[1] 1844399     400
 
 
 # load initial data saved in initial.regions.Rdata object when running generate.synthetic.data.R
@@ -15,6 +14,7 @@ load('initial.regions.Rdata')
 dim(initial.regions)
 # [1] 1000000   400
 
+load("CGH.calls.Rdata")
 # colapse CGHcall output to 3 states
 CGH.calls <- as.data.frame(calls(result0))
 range(CGH.calls)
@@ -22,12 +22,23 @@ range(CGH.calls)
 CGH.calls[CGH.calls<0] <- -1
 CGH.calls[CGH.calls>0] <- 1
 CGH.calls <- data.frame( lapply( CGH.calls , factor , levels = c(-1,0,1) ) )
+dim(CGH.calls)
+#[1] 1835630     400
+
+# reduce the initial number of probes to the number of probes resulting after running the CGHcall procedure
+red.init.reg = initial.regions[intersect(rownames(initial.regions), rownames(CGH.calls)),]
+dim(red.init.reg)
+#[1] 1835630     400
+
+# check if the probes match
+all.equal.character(rownames(red.init.reg), rownames(CGH.calls))
+#[1] TRUE
 
 
 # calculate confusion matrix
-confusion.matrix.cghcall <- as.data.frame(sapply(1:ncol(initial.regions), function(i) table(initial.regions[,i],CGH.calls[,i])))
+confusion.matrix.cghcall <- as.data.frame(sapply(1:ncol(red.init.reg), function(i) table(red.init.reg[,i],CGH.calls[,i])))
 colnames(confusion.matrix.cghcall) <- colnames(CGH.calls)
-confusion.matrix.cghcall <- cbind(as.data.frame(table(initial.regions[,1],CGH.calls[,1]))[,1:2], confusion.matrix.cghcall)
+confusion.matrix.cghcall <- cbind(as.data.frame(table(red.init.reg[,1],CGH.calls[,1]))[,1:2], confusion.matrix.cghcall)
 colnames(confusion.matrix.cghcall)[1:2] <- c("true", "CGHcall")
 
 # true/false positions
@@ -68,11 +79,11 @@ F.CGHcall.gain = (2 * precision.CGHcall.gain * recall.CGHcall.gain) / (precision
 F.CGHcall.normal = (2 * precision.CGHcall.normal * recall.CGHcall.normal) / (precision.CGHcall.normal + recall.CGHcall.normal)
 F.CGHcall.loss = (2 * precision.CGHcall.loss * recall.CGHcall.loss) / (precision.CGHcall.loss + recall.CGHcall.loss)
 
-F.score.cghcall.n.10_6 = data.frame(loss = F1.CGHcall.loss, normal = F1.CGHcall.normal, gain = F1.CGHcall.gain, Method = "CGHcall", tumour.purity = c(rep(1,100),rep(.7,100),rep(.5,100),rep(.3,100))) 
-F.score.cghcall.n.10_6$loss[is.nan(F.score.cghcall.n.10_6$loss)] = 0
-F.score.cghcall.n.10_6$normal[is.nan(F.score.cghcall.n.10_6$normal)] = 0
-F.score.cghcall.n.10_6$gain[is.nan(F.score.cghcall.n.10_6$gain)] = 0
+F.score.cghcall = data.frame(loss = F.CGHcall.loss, normal = F.CGHcall.normal, gain = F.CGHcall.gain, Method = "CGHcall", tumour.purity = c(rep(1,100),rep(.7,100),rep(.5,100),rep(.3,100))) 
+F.score.cghcall$loss[is.nan(F.score.cghcall$loss)] = 0
+F.score.cghcall$normal[is.nan(F.score.cghcall$normal)] = 0
+F.score.cghcall$gain[is.nan(F.score.cghcall$gain)] = 0
 
-save(F.score.cghcall.n.10_6, file = 'F.score.cghcall.n10_6.Rdata')
+save(F.score.cghcall, file = 'F.score.cghcall.Rdata')
 
 
