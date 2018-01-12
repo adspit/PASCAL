@@ -8,12 +8,6 @@ load("initial.regions.Rdata")
 #dim(initial.regions)
 #[1] 1844399     400
 
-
-# load initial data saved in initial.regions.Rdata object when running generate.synthetic.data.R
-load('initial.regions.Rdata')
-dim(initial.regions)
-# [1] 1000000   400
-
 load("CGH.calls.Rdata")
 # colapse CGHcall output to 3 states
 CGH.calls <- as.data.frame(calls(result0))
