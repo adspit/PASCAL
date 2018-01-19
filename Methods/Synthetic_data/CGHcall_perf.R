@@ -66,7 +66,7 @@ recall.CGHcall.normal <- as.numeric(confusion.matrix.cghcall[5,-c(1,2)] / apply(
 recall.CGHcall.normal[is.nan(recall.CGHcall.normal)]= 0
 
 recall.CGHcall.gain <- as.numeric(confusion.matrix.cghcall[9,-c(1,2)] /apply(confusion.matrix.cghcall[,-c(1,2)],2,function(x) sum(x[c(3,6,9)])))
-hist(as.numeric(recall.CGHcall.gain))
+recall.CGHcall.gain[is.nan(recall.CGHcall.gain)]= 0
 
 
 F.CGHcall.gain = (2 * precision.CGHcall.gain * recall.CGHcall.gain) / (precision.CGHcall.gain + recall.CGHcall.gain)
