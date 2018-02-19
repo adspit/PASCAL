@@ -1,7 +1,19 @@
 
 
 # first load matrix consisting of the lrr signals saved when generating the synthetic data
-# for example: load('lrr_siganls.Rdata')
+# for example: load('lrr_signals.Rdata')
+
+
+#change fData
+
+# load Affymetrix coordinates
+load('Affymetrix_SNP_probe_names.Rdata')
+probe_names$Position = probe_names$Start+12
+# analysis on the new data
+snp_probes_featData = data.frame(Name = rownames(probe_names),  Chr = probe_names$Chromosome, Position = probe_names$Position)
+all.equal(snp_probes_featData, snp_probes_featData[order(snp_probes_featData$Chr, snp_probes_featData$Position),])
+# [1] TRUE
+
 
 
 # add probe locations to the lrr signals matrix
