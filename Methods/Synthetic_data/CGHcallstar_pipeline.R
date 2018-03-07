@@ -15,7 +15,7 @@ data <- cbind(data,lrr_signals)
 cgh <- make_cghRaw(data)
 
 # preprocess raw data - e.g. Filter out data with missing position information.
-raw.data <- preprocess(cgh)
+raw.data <- preprocess(cgh, nchrom = 24)
 
 # normalize data
 normalized.data = norm_star(raw.data)
