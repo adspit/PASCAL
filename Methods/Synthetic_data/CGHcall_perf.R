@@ -18,6 +18,9 @@ CGH.calls[CGH.calls>0] <- 1
 CGH.calls <- data.frame( lapply( CGH.calls , factor , levels = c(-1,0,1) ) )
 dim(CGH.calls)
 #[1] 1835630     400
+rownames(CGH.calls) = rownames(calls(result0))
+
+
 
 # reduce the initial number of probes to the number of probes resulting after running the CGHcall procedure
 red.init.reg = initial.regions[intersect(rownames(initial.regions), rownames(CGH.calls)),]
