@@ -39,7 +39,7 @@ postsegnormalized.data <- postsegnormalize(segmented.data)
 perc.tumor <- c(rep(1,100),rep(.7,100),rep(.5,100),rep(.3,100))
 
 # run the CGHcall algorithm. The cellularity parameter represents the tumour purity.
-CGHresult <- CGHcall(postsegnormalized.data ,cellularity=perc.tumor, ncpus = 14)
+CGHresult <- CGHcall(postsegnormalized.data ,cellularity=perc.tumor, build = "GRCh36", ncpus = 14)
 
 # obtain profile after running CGHcall - this return a Rdata object
 CGHresult_expand <- ExpandCGHcall(CGHresult,postsegnormalized.data, memeff=T, divide = 1)
