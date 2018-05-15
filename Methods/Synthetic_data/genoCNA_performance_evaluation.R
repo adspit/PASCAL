@@ -12,7 +12,7 @@ result_files_snp_level_genocna_t1 = mixedsort(result_files_snp_level_genocna_t1[
 test_t1 =  lapply(result_files_snp_level_genocna_t1, function(x) { aux = read.table(x, sep="\t", h=T, stringsAsFactors=F, row.names = 1)})
 
 length(test_t1)
-# [1] 91
+# [1] 100
 names(test_t1) = result_files_snp_level_genocna_t1
 cn_calls_t1 = lapply(1:100, function(x) {colnames(test_t1[[x]])[3] = names(test_t1)[x]; test_t1[[x]][3]})
 aux_t1 = Reduce(function(x, y) merge(x, y, all = TRUE), lapply(cn_calls_t1, function(y) data.table(y, keep.rownames=TRUE, key = "rn")))
@@ -34,10 +34,23 @@ predicted_states_t1[predicted_states_t1<2] = -1
 predicted_states_t1[predicted_states_t1==2] = 0
 predicted_states_t1[predicted_states_t1>2] =  1
 predicted_states_t1 = as.data.frame(predicted_states_t1)
+predicted_states_t1[1:5, 1:5]
+#                  sample_t1_1_SNP.txt sample_t1_2_SNP.txt sample_t1_3_SNP.txt
+# AFFX-SNP_10000979                  NA                  NA                  NA
+# AFFX-SNP_10009702                  NA                  -1                  -1
+# AFFX-SNP_10021569                   1                  NA                   1
+# AFFX-SNP_10026879                  NA                  NA                  -1
+# AFFX-SNP_10034687                  NA                  NA                  -1                                                             
 genocna.calls.t1 <- data.frame(lapply( predicted_states_t1 , factor , levels = c(-1,0,1) ) )
+genocna.calls.t1[1:5, 1:3]
+#  sample_t1_1_SNP.txt sample_t1_2_SNP.txt sample_t1_3_SNP.txt
+# 1                <NA>                <NA>                <NA>
+# 2                <NA>                  -1                  -1
+# 3                   1                <NA>                   1
+# 4                <NA>                <NA>                  -1
+# 5                <NA>                <NA>                  -1
 rownames(genocna.calls.t1) = rownames(predicted_states_t1)
-
-save(genocna.calls.t1, file = 'genocna_calls_t1.Rdata')
+# save(genocna.calls.t1, file = 'genocna_calls_t1.Rdata')
 
 
 # same for 0.7
@@ -84,9 +97,6 @@ save.image('genocna.t07.Rdata')
 
 
 
-
-
-
 # same for 0.5
 # calculate f-scores for t1 genocnca results
 # select SNP level calls files
@@ -104,7 +114,6 @@ dim(predicted_states_t05)
 # [1] 1844399     100
 predicted_states_t05 = as.matrix(predicted_states_t05)
 rownames(predicted_states_t05) = aux_t05$rn
-predicted_states_t05[1:5, 1:3]
 predicted_states_t05[1:5, 1:2]
 #                       sample_t05_201_SNP.txt sample_t05_202_SNP.txt
 # AFFX-SNP_10000979                     NA                     NA
@@ -116,6 +125,49 @@ predicted_states_t05[1:5, 1:2]
 predicted_states_t05[predicted_states_t05<2] = -1
 predicted_states_t05[predicted_states_t05==2] = 0
 predicted_states_t05[predicted_states_t05>2] =  1
+
+predicted_states_t05 = as.data.frame(predicted_states_t05)
+genocna.calls.t05 <- data.frame(lapply( predicted_states_t05 , factor , levels = c(-1,0,1) ) )
+rownames(genocna.calls.t05) = rownames(predicted_states_t05)
+save(genocna.calls.t05, file = 'genocna_calls_t05.Rdata')
+save.image('genocna.t05.Rdata')
+
+
+# same for 0.3
+# calculate f-scores for t1 genocnca results
+# select SNP level calls files
+setwd('/home/icb/adriana.pitea/GenoCNA_synthetic/')
+
+result_files_snp_level_genocna_t03 = dir(pattern='sample_t03_')
+result_files_snp_level_genocna_t03 = mixedsort(result_files_snp_level_genocna_t03[grep('_SNP.txt', result_files_snp_level_genocna_t03)])
+
+test_t03 =  lapply(result_files_snp_level_genocna_t03, function(x) { aux = read.table(x, sep="\t", h=T, stringsAsFactors=F, row.names = 1)})
+
+
+names(test_t03) = result_files_snp_level_genocna_t03
+cn_calls_t03 = lapply(1:100, function(x) {colnames(test_t03[[x]])[3] = names(test_t03)[x]; test_t03[[x]][3]})
+aux_t03 = Reduce(function(x, y) merge(x, y, all = TRUE), lapply(cn_calls_t03, function(y) data.table(y, keep.rownames=TRUE, key = "rn")))
+predicted_states_t03 = aux_t03[,-1]
+dim(predicted_states_t03)
+# [1] 1844399     100
+predicted_states_t03 = as.matrix(predicted_states_t03)
+rownames(predicted_states_t03) = aux_t03$rn
+predicted_states_t03[1:5, 1:3]
+#                         sample_t03_301_SNP.txt sample_t03_302_SNP.txt
+# AFFX-SNP_10000979                     NA                     NA
+# AFFX-SNP_10009702                     NA                      2
+# AFFX-SNP_10021569                      2                     NA
+# AFFX-SNP_10026879                     NA                     NA
+# AFFX-SNP_10034687                     NA                     NA
+
+predicted_states_t03[predicted_states_t03<2] = -1
+predicted_states_t03[predicted_states_t03==2] = 0
+predicted_states_t03[predicted_states_t03>2] =  1
+predicted_states_t03 = as.data.frame(predicted_states_t03)
+genocna.calls.t03 <- data.frame(lapply( predicted_states_t03 , factor , levels = c(-1,0,1) ) )
+rownames(genocna.calls.t03) = rownames(predicted_states_t03)
+save(genocna.calls.t03, file = 'genocna_calls_t03.Rdata')
+save.image('genocna.t03.Rdata')
 
 
 
@@ -225,45 +277,3 @@ F.score.genocna$normal[is.nan(F.score.genocna$normal)] = 0
 F.score.genocna$gain[is.nan(F.score.genocna$gain)] = 0
 
 save.image('performance.analysis.genocna.synthetic.Rdata')
-predicted_states_t05 = as.data.frame(predicted_states_t05)
-genocna.calls.t05 <- data.frame(lapply( predicted_states_t05 , factor , levels = c(-1,0,1) ) )
-rownames(genocna.calls.t05) = rownames(predicted_states_t05)
-save(genocna.calls.t05, file = 'genocna_calls_t05.Rdata')
-save.image('genocna.t05.Rdata')
-
-
-# same for 0.3
-# calculate f-scores for t1 genocnca results
-# select SNP level calls files
-setwd('/home/icb/adriana.pitea/GenoCNA_synthetic/')
-
-result_files_snp_level_genocna_t03 = dir(pattern='sample_t03_')
-result_files_snp_level_genocna_t03 = mixedsort(result_files_snp_level_genocna_t03[grep('_SNP.txt', result_files_snp_level_genocna_t03)])
-
-test_t03 =  lapply(result_files_snp_level_genocna_t03, function(x) { aux = read.table(x, sep="\t", h=T, stringsAsFactors=F, row.names = 1)})
-
-
-names(test_t03) = result_files_snp_level_genocna_t03
-cn_calls_t03 = lapply(1:100, function(x) {colnames(test_t03[[x]])[3] = names(test_t03)[x]; test_t03[[x]][3]})
-aux_t03 = Reduce(function(x, y) merge(x, y, all = TRUE), lapply(cn_calls_t03, function(y) data.table(y, keep.rownames=TRUE, key = "rn")))
-predicted_states_t03 = aux_t03[,-1]
-dim(predicted_states_t03)
-# [1] 1844399     100
-predicted_states_t03 = as.matrix(predicted_states_t03)
-rownames(predicted_states_t03) = aux_t03$rn
-predicted_states_t03[1:5, 1:3]
-#                         sample_t03_301_SNP.txt sample_t03_302_SNP.txt
-# AFFX-SNP_10000979                     NA                     NA
-# AFFX-SNP_10009702                     NA                      2
-# AFFX-SNP_10021569                      2                     NA
-# AFFX-SNP_10026879                     NA                     NA
-# AFFX-SNP_10034687                     NA                     NA
-
-predicted_states_t03[predicted_states_t03<2] = -1
-predicted_states_t03[predicted_states_t03==2] = 0
-predicted_states_t03[predicted_states_t03>2] =  1
-predicted_states_t03 = as.data.frame(predicted_states_t03)
-genocna.calls.t03 <- data.frame(lapply( predicted_states_t03 , factor , levels = c(-1,0,1) ) )
-rownames(genocna.calls.t03) = rownames(predicted_states_t03)
-save(genocna.calls.t03, file = 'genocna_calls_t03.Rdata')
-save.image('genocna.t03.Rdata')
