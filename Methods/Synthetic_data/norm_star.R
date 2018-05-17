@@ -1,4 +1,4 @@
-norm_me = function (input, method = "median", smoothOutliers = TRUE, ...) 
+norm_star = function (input, method = "median", smoothOutliers = TRUE, ...) 
 {
   values <- c()
   if (method == "none") {
