@@ -72,6 +72,7 @@ ascat.CN <- ascat.output$nA+ascat.output$nB
 range(ascat.CN)
 # [1]  0 22
 
+# define the three classes
 ascat.CN[ascat.CN<2] <- -1
 ascat.CN[ascat.CN==2] <- 0
 ascat.CN[ascat.CN>2] <- 1
