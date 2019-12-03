@@ -23,7 +23,6 @@ range(regDat$c)
 
 simFUN <- function(dataSet, tumorFraction, n) {
   regDat <- loadCnRegionData(dataSet=dataSet, tumorFraction=tumorFraction) # load data from dataSet with tumour fraction given by the tumorFraction parameter
-  # we obser that for tumour purity
   regDat = regDat[regDat$c >0,]
   reg = sample(regions,sample(2:length(regions)))
   ## breakpoint positions - we samples 3 breakpoints from n probes
